@@ -4,8 +4,8 @@ Este README está dividido em duas partes para facilitar o desenvolvimento e tes
 
 - **[Parte A: Captura de Dados via MQTT](README_Lab02_parte_a.md)** - Foca na coleta e armazenamento de dados climáticos.
 - **[Parte B: Assistente Telegram com IA](README_Lab02_parte_b.md)** - Foca no bot interativo e processamento com IA.
+- **[Fundamentos e Tecnologias Utilizadas](README_Fundamentos.md)** - Para entender melhor os conceitos e tecnologias utilizados neste projeto, consulte o documento.
 
-Abaixo está a documentação completa do sistema integrado.
 
 ## 🌟 Sobre o Projeto
 
