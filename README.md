@@ -1,5 +1,11 @@
 # Sistema de Assistente Telegram com Dados Climáticos - Goiânia
 
+Este README está dividido em duas partes para facilitar o desenvolvimento e teste incremental:
+
+- **[Parte A: Captura de Dados via MQTT](README_Lab02_parte_a.md)** - Foca na coleta e armazenamento de dados climáticos.
+- **[Parte B: Assistente Telegram com IA](README_Lab02_parte_b.md)** - Foca no bot interativo e processamento com IA.
+
+Abaixo está a documentação completa do sistema integrado.
 
 ## 🌟 Sobre o Projeto
 
