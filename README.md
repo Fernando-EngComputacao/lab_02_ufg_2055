@@ -1,5 +1,6 @@
 # Sistema de Assistente Telegram com Dados Climáticos - Goiânia
 
+
 ## 🌟 Sobre o Projeto
 
 Este projeto implementa um assistente inteligente no Telegram que fornece recomendações personalizadas de locais para visitar em Goiânia, baseando-se em dados climáticos em tempo real. O sistema utiliza uma arquitetura IoT completa com MQTT, banco de dados de série temporal, e integração com IA (Google Gemini).
@@ -34,6 +35,59 @@ Este projeto implementa um assistente inteligente no Telegram que fornece recome
 - **Telegram Bot Token**: Criar bot via @BotFather
 - **Google Gemini API Key**: Conta no Google Cloud Platform
 - **MQTT Broker**: Pode usar um broker público ou privado
+
+## Configuração do EC2 AWS
+
+**Proteger chave**
+
+```bash
+chmod 400 minha-chave-docker.pem
+```
+
+**acesso via ssh**
+
+```bash
+ssh -i "minha-chave-docker.pem" ec2-user@SEU_IP_PUBLICO_AQUI
+```
+
+**Atualiza os pacotes do sistema**
+
+```bash
+sudo yum update -y
+```
+
+**Instala o docker**
+
+```bash
+sudo yum install docker -y
+```
+
+**Iniciar o docker**
+
+```bash
+sudo service docker start
+```
+
+**Add User ao grupo do Docker**
+
+```bash
+sudo usermod -a -G docker ec2-user
+```
+
+**Sai do servidor**
+
+```bash
+exit
+```
+
+**Docker compose**
+
+```bash
+sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s | tr '[:upper:]' '[:lower:]')-$(uname -m)" -o /usr/libexec/docker/cli-plugins/docker-compose
+sudo chmod +x /usr/libexec/docker/cli-plugins/docker-compose
+docker compose version
+```
+
 
 ## 🚀 Instalação e Configuração
 
