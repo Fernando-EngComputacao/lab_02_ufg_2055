@@ -4,8 +4,6 @@ services:
   postgres:
     container_name: postgres
     image: postgres:15
-    networks:
-      - evolution-net
     command: [
       "postgres",
       "-c", "max_connections=200",
@@ -47,8 +45,6 @@ services:
     volumes:
       - influxdb_data:/var/lib/influxdb2
       - influxdb_config:/etc/influxdb2
-    networks:
-      - evolution-net
     environment:
       - DOCKER_INFLUXDB_INIT_MODE=setup
       - DOCKER_INFLUXDB_INIT_USERNAME=admin
