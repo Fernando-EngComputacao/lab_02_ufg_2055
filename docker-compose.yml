@@ -1,0 +1,105 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:latest
+    platform: linux/amd64
+    command: redis-server --requirepass default
+    environment:
+      REDIS_USER: default
+      REDIS_PASSWORD: default
+    ports:
+      - "6379:6379"
+    networks:
+      - evolution-net
+
+
+  api:
+    container_name: evolution_api
+    image: evoapicloud/evolution-api:latest
+    restart: always
+    depends_on:
+      - redis
+      - postgres
+    ports:
+      - 8080:8080
+    volumes:
+      - evolution_instances:/evolution/instances
+    networks:
+      - evolution-net
+    env_file:
+      - .env
+    expose:
+      - 8080
+
+  postgres:
+    container_name: postgres
+    image: postgres:15
+    networks:
+      - evolution-net
+    command: [
+      "postgres",
+      "-c", "max_connections=200",
+      "-c", "listen_addresses=*",
+      "-c", "shared_buffers=256MB",
+      "-c", "effective_cache_size=1GB",
+      "-c", "work_mem=4MB"
+    ]
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_DB=evolution_db
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    volumes:
+    - postgres_data:/var/lib/postgresql/data
+
+  nodered:
+    container_name: nodered
+    image: nodered/node-red:latest
+    restart: unless-stopped
+    ports:
+      - "1880:1880" # Acesse em http://localhost:1880
+    volumes:
+      - nodered_data:/data
+    networks:
+      - evolution-net
+    environment:
+      - TZ=America/Sao_Paulo
+    depends_on:
+      - api
+      - influxdb
+
+  influxdb:
+    container_name: influxdb
+    image: influxdb:2.7
+    restart: unless-stopped
+    ports:
+      - "8086:8086"
+    volumes:
+      - influxdb_data:/var/lib/influxdb2
+      - influxdb_config:/etc/influxdb2
+    networks:
+      - evolution-net
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=admin
+      - DOCKER_INFLUXDB_INIT_PASSWORD=UFGInf2025@
+      - DOCKER_INFLUXDB_INIT_ORG=UFGInf2025
+      - DOCKER_INFLUXDB_INIT_BUCKET=UFG-Weather
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=dafda90fasd8f0adsadacsda9s0djdad8a9sd
+
+volumes:
+  evolution_instances:
+  evolution_redis:
+  postgres_data:
+  nodered_data:
+  influxdb_data:
+  influxdb_config:
+
+networks:
+  evolution-net:
+    name: evolution-net
+    driver: bridge
