@@ -61,10 +61,28 @@ Um banco de dados de série temporal é projetado para lidar com dados que possu
 
 ## 🛠️ Outros Conceitos Importantes
 
-### 🐳 Docker e Docker Compose
+### 🐳 Docker
 
-- 🐳 **Docker**: Ferramenta para criar, implantar e executar aplicativos em contêineres.
-- 📋 **Docker Compose**: Ferramenta para definir e gerenciar aplicativos multi-contêiner.
+🐳 **Docker** é uma plataforma de containerização open-source que permite empacotar aplicações e suas dependências em contêineres leves e portáteis. Isso facilita a implantação, execução e escalabilidade consistente de aplicações em diferentes ambientes, desde desenvolvimento local até produção em nuvem.
+
+#### � Como Funciona?
+
+- **Contêineres**: Unidades leves e isoladas que executam aplicações, compartilhando o kernel do sistema operacional host, o que os torna eficientes.
+- **Imagens**: Modelos imutáveis e leves que contêm tudo necessário para executar uma aplicação (código, bibliotecas, dependências).
+- **Docker Engine**: O runtime que constrói, executa e gerencia contêineres.
+- **Dockerfile**: Arquivo de configuração usado para criar imagens personalizadas.
+
+**Vantagens**:
+- 🚀 Portabilidade: Execute em qualquer lugar com Docker instalado.
+- ⚡ Eficiência: Contêineres são mais leves que máquinas virtuais.
+- 🔒 Isolamento: Aplicações não interferem umas nas outras.
+
+- 🌐 **Site oficial**: [https://www.docker.com/](https://www.docker.com/)
+- 📖 **Documentação oficial**: [https://docs.docker.com/](https://docs.docker.com/)
+
+### 📋 Docker Compose
+
+📋 **Docker Compose** é uma ferramenta para definir e gerenciar aplicações multi-contêiner usando arquivos YAML. Permite orquestrar vários serviços relacionados em um único comando.
 
 ### 📱 Telegram Bot
 
