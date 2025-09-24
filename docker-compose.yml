@@ -1,37 +1,6 @@
 version: '3.8'
 
 services:
-  redis:
-    image: redis:latest
-    platform: linux/amd64
-    command: redis-server --requirepass default
-    environment:
-      REDIS_USER: default
-      REDIS_PASSWORD: default
-    ports:
-      - "6379:6379"
-    networks:
-      - evolution-net
-
-
-  api:
-    container_name: evolution_api
-    image: evoapicloud/evolution-api:latest
-    restart: always
-    depends_on:
-      - redis
-      - postgres
-    ports:
-      - 8080:8080
-    volumes:
-      - evolution_instances:/evolution/instances
-    networks:
-      - evolution-net
-    env_file:
-      - .env
-    expose:
-      - 8080
-
   postgres:
     container_name: postgres
     image: postgres:15
@@ -64,12 +33,9 @@ services:
       - "1880:1880" # Acesse em http://localhost:1880
     volumes:
       - nodered_data:/data
-    networks:
-      - evolution-net
     environment:
       - TZ=America/Sao_Paulo
     depends_on:
-      - api
       - influxdb
 
   influxdb:
@@ -92,14 +58,7 @@ services:
       - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=dafda90fasd8f0adsadacsda9s0djdad8a9sd
 
 volumes:
-  evolution_instances:
-  evolution_redis:
   postgres_data:
   nodered_data:
   influxdb_data:
   influxdb_config:
-
-networks:
-  evolution-net:
-    name: evolution-net
-    driver: bridge
